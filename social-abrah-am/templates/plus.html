@@ -56,5 +56,16 @@
     </div>
     {% end if %}
 
+    <br>
+    <div class='row'>
+        <div class="col-md-12">
+            <div class="btn-group btn-group-justified">
+                <a class="btn btn-default" role="button" href="{{post['url']}}" target="_blank"><span class="glyphicon glyphicon-plus"></span>&nbsp;<strong>{{post['object']['plusoners']['totalItems']}}</strong></a>
+                <a class="btn btn-default" role="button" href="{{post['url']}}" target="_blank"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;<strong>{{post['object']['resharers']['totalItems']}}</strong></a>
+                <a class="btn btn-default" role="button" href="{{post['url']}}" target="_blank"><span class="glyphicon glyphicon-comment"></span>&nbsp;<strong>{{post['object']['replies']['totalItems']}}</strong></a>
+            </div>
+        </div>
+    </div>
+
 </div>
 
