@@ -31,8 +31,8 @@ class RequestHandler(tornado.web.RequestHandler):
         if proto.lower() == 'https' :
             self.set_header('Strict-Transport-Security', 'max-age="31536000"; includeSubDomains')
 
-        if proto == 'http' and not debug:
-            print 'Redirecting to SSL', self.request.host, self.request.path, 'from', referer
-            url = u'https://{}{}'.format(self.request.host, self.request.path)
-            self.redirect(url)
-            return
+        # if proto == 'http' and not debug:
+        #     print 'Redirecting to SSL', self.request.host, self.request.path, 'from', referer
+        #     url = u'https://{}{}'.format(self.request.host, self.request.path)
+        #     self.redirect(url)
+        #     return
