@@ -1,0 +1,11 @@
+.centered {
+    text-align: center;
+}
+
+div.plus-post {
+    padding-bottom: 50px;
+}
+
+hr.plus-post {
+    border-top-width: 2px;
+}

@@ -1,0 +1,9 @@
+<div class='row'>
+    {% for attachment in object.get('attachments', []) %}
+        {% if attachment['objectType'] in ('article', 'photo', 'video', 'album') %}
+            {% module Template('plus_attachment_%s.html' % (attachment['objectType'], ), attachment=attachment) %}
+        {% else %}
+            UNKOWN ATTACHMENT TYPE {{attachment}}
+        {% end if %}
+    {% end for %}
+</div>

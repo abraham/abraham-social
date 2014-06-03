@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+<header class="container">
+    <h1 class='col-md-offset-1'>
+    <a href="https://plus.google.com/114233674199568482864" class='g-profile' target="_blank"><img src='https://abrah.am/img/logo-300.jpg' class='img-circle' width='80px' height='80px' /></a>
+    Abraham's recent social posts</h1>
+</header>
+
+<div class="container">
+    <div class="row">
+        {% for post in posts %}
+            {% module Template('plus.html', post=post) %}
+        {% end for %}
+    </div>
+</div><!-- /.container -->
+{% end bock %}

@@ -1,0 +1,33 @@
+<div class="col-md-12">
+    {% if attachment.get('image', {}).get('width', 0) == 120 %}
+        <hr>
+        <div class="media">
+            <a class="pull-left" href="{{attachment['url']}}" target='_blank'>
+                <img class="media-object" src="{{attachment['image']['url']}}" alt="...">
+            </a>
+            <div class="media-body">
+                <a class="media-heading" href="{{attachment['url']}}" target='_blank'>
+                    <span>{{attachment['displayName']}}</span>
+                </a>
+                <p>
+                    <small class='text-muted'>{{ attachment.get('content', "") }}</small>
+                </p>
+            </div>
+        </div>
+
+    {% else %}
+
+        {% if attachment.get('image', False) %}
+            <a href="{{attachment['url']}}" target='_blank'>
+                <img src="{{attachment['image']['url']}}" class="img-responsive" width="{{attachment['image']['width']}}" height="{{attachment['image']['height']}}" />
+            </a>
+        {% end if %}
+            <a class="media-heading" href="{{attachment['url']}}" target='_blank'>
+                <span>{{attachment['displayName']}}</span>
+            </a>
+            <p>
+                <small class='text-muted'>{{ attachment.get('content', "") }}</small>
+            </p>
+
+    {% end if %}
+</div>

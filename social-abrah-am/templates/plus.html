@@ -1,0 +1,60 @@
+<div class="col-md-4 col-md-offset-1 plus-post">
+    <hr class='plus-post'>
+    <div class='row'>
+        <div class="col-md-12">
+            <img src="https://ssl.gstatic.com/s2/oz/images/faviconr3.ico" width="16px" height="16px" />
+            <small class='text-muted'>Shared publicly - <a href="{{post['url']}}" target='_blank'>{{post['published']}}</a></small>
+        </div>
+    </div>
+
+    {% if post.get('annotation', False) %}
+        <div class='row'>
+            <div class="col-md-12">
+                <p>{% raw post['annotation'] %}</p>
+            </div>
+        </div>
+
+    {% elif post['object'].get('actor', None) is None %}
+        <div class='row'>
+            <div class="col-md-12">
+                <p>{% raw post['object']['content'] %}</p>
+            </div>
+        </div>
+    {% end %}
+
+    {% if post['object'].get('actor', None) is not None %}
+        <hr>
+        <div class='row'>
+            <div class="media">
+                <a class="pull-left g-profile" href="{{post['object']['actor']['url']}}" target='_blank'>
+                    <img class="media-object img-circle" src="{{post['object']['actor']['image']['url']}}" alt="...">
+                </a>
+                <div class="media-body">
+                    <div class='media-header'>
+                        <a class="g-profile" href="{{post['object']['actor']['url']}}" target='_blank'>{{post['object']['actor']['displayName']}}</a>
+                        <a href="{{post['object']['url']}}" target='_blank'>originally shared</a>:
+                    </div>
+                    <p>{% raw post['object']['content'] %}</p>
+                </div>
+            </div>
+        </div>
+    {% end if %}
+
+    {% if post['object']['objectType'] in ('note', 'activity') %}
+
+        {% module Template('plus_%s.html' % (post['object']['objectType'], ), object=post['object']) %}
+
+    {% else %}
+
+    <div class='row'>
+        <div class="col-md-12">
+            <h2>{{post['object']['objectType']}}</h2>
+            <pre>
+            UKNOWN OBJECT TYPE {{post}}
+            </pre>
+        </div>
+    </div>
+    {% end if %}
+
+</div>
+

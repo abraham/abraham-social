@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <title>{% block title %}Abraham's Social Posts{% end %}</title>
+        <meta name="description" content="Recent content created by Abraham Williams.">
+        <meta name="author" content="Abraham Williams">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="https://abrah.am/favicon.ico">
+        <link rel='me' href='https://plus.google.com/+abrahamwilliams' />
+        <link rel='author' href='https://plus.google.com/+abrahamwilliams' />
+
+        <meta property="og:title" content="{% block title %}Abraham's social posts{% end %}" />
+        <meta property="og:image" content="https://abrah.am/img/logo-300.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="Recent content created by Abraham Williams.">
+
+        <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="/css/style.css" rel="stylesheet" media="screen">
+
+    </head>
+
+    <body>
+        <!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            nav
+        </nav> -->
+
+        {% block container %}{% end %}
+
+        <footer class='row'>
+            <div class='col-md-10 col-md-offset-1'>
+                <p>Built by <a href="https://abrah.am">Abraham Williams</a></p>
+            </div>
+        </footer>
+
+        <script src='/js/script.js'></script>
+    </body>
+</html>

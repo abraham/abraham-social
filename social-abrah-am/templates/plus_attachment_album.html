@@ -1,0 +1,11 @@
+{% for thumbnail in attachment['thumbnails'] %}
+    <div class="col-md-6">
+        <a href="{{thumbnail['url']}}" class="thumbnail" target="_blank">
+            <img src="{{thumbnail['image']['url']}}" class="img-responsive" alt="{{thumbnail['description']}}" title="{{thumbnail['description']}}" />
+        </a>
+    </div>
+{% end for %}
+
+<div class="col-md-12">
+    <a href="{{attachment['url']}}" target="_blank">View album</a>
+</div>
