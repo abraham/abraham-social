@@ -1,1 +1,1 @@
-web: python posts-abrah-am/httpd.py
+web: python social-abrah-am/httpd.py
