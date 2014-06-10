@@ -1,7 +1,7 @@
 """Modifications for all requests."""
 
 
-from tornado import gen
+from tornado import gen, web
 
 
 class RequestHandler(web.RequestHandler):
