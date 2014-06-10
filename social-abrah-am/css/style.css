@@ -9,3 +9,7 @@ div.plus-post {
 hr.plus-post {
     border-top-width: 2px;
 }
+
+a.decoration-none:hover {
+    text-decoration: none;
+}
