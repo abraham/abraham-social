@@ -7,6 +7,7 @@ from motor import MotorReplicaSetClient
 
 
 from indexhandler import IndexHandler
+from uptimehandler import UptimeHandler
 
 
 dbConnection = os.environ.get('MONGODB_CONNECTION')
@@ -25,7 +26,7 @@ settings = {
 application = web.Application([
     (r'/', IndexHandler),
     # (r'/plus/', IndexHandler),
-    # (r'/uptime', IndexHandler),
+    (r'/uptime', UptimeHandler),
 
     (r'/favicon.ico', web.RedirectHandler, {'url': '/img/favicon.ico'}),
     (r'/css/(.*)', web.StaticFileHandler, {'path': 'social-abrah-am/css'}),

@@ -1,10 +1,12 @@
-import tornado
+"""Modifications for all requests."""
+
+
 from tornado import gen
 
 
-class RequestHandler(tornado.web.RequestHandler):
+class RequestHandler(web.RequestHandler):
 
-    @gen.coroutine 
+    @gen.coroutine
     def prepare(self):
         proto = self.request.headers.get('X-Forwarded-Proto', 'http')
         origin = self.request.headers.get('Origin', None)
@@ -28,11 +30,5 @@ class RequestHandler(tornado.web.RequestHandler):
         self.set_header('X-Frame-Options', 'DENY')
         self.set_header('X-UA-Compatible', 'IE=edge, chrome=1')
 
-        if proto.lower() == 'https' :
+        if proto.lower() == 'https':
             self.set_header('Strict-Transport-Security', 'max-age="31536000"; includeSubDomains')
-
-        # if proto == 'http' and not debug:
-        #     print 'Redirecting to SSL', self.request.host, self.request.path, 'from', referer
-        #     url = u'https://{}{}'.format(self.request.host, self.request.path)
-        #     self.redirect(url)
-        #     return
