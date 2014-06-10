@@ -1,7 +1,9 @@
+"""Route paths and serve content."""
+
+
 import os
-import tornado
-import tornado.web
-import motor
+from tornado import ioloop, web
+from motor import MotorReplicaSetClient
 
 
 from indexhandler import IndexHandler
@@ -9,7 +11,7 @@ from indexhandler import IndexHandler
 
 dbConnection = os.environ.get('MONGODB_CONNECTION')
 dbReplicaSet = os.environ.get('MONGODB_SET')
-db = motor.MotorReplicaSetClient(dbConnection, replicaSet=dbReplicaSet).posts
+db = MotorReplicaSetClient(dbConnection, replicaSet=dbReplicaSet).posts
 
 
 settings = {
@@ -20,16 +22,16 @@ settings = {
 }
 
 
-application = tornado.web.Application([
+application = web.Application([
     (r'/', IndexHandler),
     # (r'/plus/', IndexHandler),
     # (r'/uptime', IndexHandler),
 
-    (r'/favicon.ico', tornado.web.RedirectHandler, {'url': 'https://abrah.am/favicon.ico'}),
-    (r'/css/(.*)', tornado.web.StaticFileHandler, {'path': 'social-abrah-am/css'}),
-    (r'/img/(.*)', tornado.web.StaticFileHandler, {'path': 'social-abrah-am/img'}),
-    (r'/js/(.*)', tornado.web.StaticFileHandler, {'path': 'social-abrah-am/js'}),
-    (r'/fonts/(.*)', tornado.web.StaticFileHandler, {'path': 'social-abrah-am/fonts'}),
+    (r'/favicon.ico', web.RedirectHandler, {'url': '/img/favicon.ico'}),
+    (r'/css/(.*)', web.StaticFileHandler, {'path': 'social-abrah-am/css'}),
+    (r'/img/(.*)', web.StaticFileHandler, {'path': 'social-abrah-am/img'}),
+    (r'/js/(.*)', web.StaticFileHandler, {'path': 'social-abrah-am/js'}),
+    (r'/fonts/(.*)', web.StaticFileHandler, {'path': 'social-abrah-am/fonts'}),
 ], **settings)
 
 
@@ -41,4 +43,4 @@ if __name__ == '__main__':
     print '==============='
     print 'DEBUG', settings['debug']
     application.listen(port)
-    tornado.ioloop.IOLoop.instance().start()
+    ioloop.IOLoop.instance().start()
