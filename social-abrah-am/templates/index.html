@@ -11,7 +11,9 @@
 <div class="container">
     <div class="row">
         {% for post in posts %}
-            {% module Template('plus.html', post=post) %}
+            {% if post['_']['ns'] in ('plus', 'twitter') %}
+                {% module Template(post['_']['ns'] + '.html', post=post) %}
+            {% end %}
         {% end for %}
     </div>
 </div><!-- /.container -->

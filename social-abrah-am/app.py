@@ -10,6 +10,8 @@ from indexhandler import IndexHandler
 from uptimehandler import UptimeHandler
 
 
+import views
+
 dbConnection = os.environ.get('MONGODB_CONNECTION')
 dbReplicaSet = os.environ.get('MONGODB_SET')
 db = MotorReplicaSetClient(dbConnection, replicaSet=dbReplicaSet).posts
@@ -20,6 +22,7 @@ settings = {
     'gzip': True,
     'db': db,
     'template_path': 'social-abrah-am/templates',
+    'ui_methods': views,
 }
 
 

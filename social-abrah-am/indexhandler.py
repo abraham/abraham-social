@@ -17,7 +17,7 @@ class IndexHandler(RequestHandler):
 
         posts = []
         db = self.settings['db']
-        cursor = db.posts.find().sort('updated', -1).limit(50)
+        cursor = db.posts.find().sort('_.created', -1).limit(50)
 
         while (yield cursor.fetch_next):
             post = cursor.next_object()
