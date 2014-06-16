@@ -5,13 +5,13 @@
 <header class="container">
     <h1 class='col-md-offset-1'>
     <a href="https://plus.google.com/114233674199568482864" class='g-profile' target="_blank"><img src='https://abrah.am/img/logo-300.jpg' class='img-circle' width='80px' height='80px' /></a>
-    Abraham's recent social posts <small><a href="https://plus.google.com/114233674199568482864" class='g-profile img-rounded' target="_blank"><img src="/img/plus.ico" class="img" width="24px" height="24px"></a> <a href="https://twitter.com/abraham" target="_blank"><img src="/img/twitter.ico" class="img" width="24px" height="24px"></a></small></h1>
+    Abraham's recent social activity <small><a href="https://plus.google.com/114233674199568482864" class='g-profile img-rounded' target="_blank"><img src="/img/plus.png" class="img" width="24px" height="24px"></a> <a href="https://twitter.com/abraham" target="_blank"><img src="/img/twitter.png" class="img" width="24px" height="24px"></a> <a href="https://github.com/abraham" target="_blank"><img src="/img/github.png" class="img" width="24px" height="24px"></a></small></h1>
 </header>
 
 <div class="container">
     <div class="row">
         {% for post in posts %}
-            {% if post['_']['ns'] in ('plus', 'twitter') %}
+            {% if post['_']['ns'] in ('plus', 'twitter', 'github') %}
                 {% module Template(post['_']['ns'] + '.html', post=post) %}
             {% end %}
         {% end for %}
