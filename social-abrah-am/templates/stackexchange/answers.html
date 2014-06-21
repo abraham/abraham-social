@@ -1,0 +1,43 @@
+<div class="col-md-4 col-md-offset-1 plus-post">
+    <hr class='plus-post'>
+    <div class='row'>
+        <div class="col-md-12">
+            <img src="/img/stackoverflow.png" width="16px" height="16px" />
+            <small class='text-muted'>Answered publicly - <a href="{{post['link']}}" target='_blank' class='time'>{{post['_']['created']}}z</a></small>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class="col-md-12">
+            <strong>{% raw post['title'] %}</strong>
+        </div>
+    </div>
+
+    <div class='row'>
+        <div class="col-md-12">
+            <!--{% set body = post['body'].replace('http://i.stack.imgur.com/', 'https://i.stack.imgur.com/') %}-->
+            <!--{% set body = body.replace('<img ', '<img class="img-responsive" ') %}-->
+            <p>{% raw body %}</p>
+        </div>
+    </div>
+
+    <br>
+
+    <div class='row'>
+        <div class="col-md-12">
+            <div class="text-justify">
+
+                {% if post['is_accepted'] %}
+                <a class="text-justify decoration-none col-md-2 col-md-offset-1" href="{{post['link']}}" target="_blank"><span class="glyphicon glyphicon-ok text-success"></span></a>
+                {% end %}
+
+                <a class="text-justify decoration-none col-md-3 {% if not post['is_accepted'] %}col-md-offset-2{% end %}" href="{{post['link']}}" target="_blank"><span class="glyphicon glyphicon-chevron-up"></span>&nbsp;{{post['up_vote_count']}}</a>
+
+                <a class="text-justify decoration-none col-md-3" href="{{post['link']}}" target="_blank"><span class="glyphicon glyphicon-chevron-down"></span>&nbsp;{{post['down_vote_count']}}</a>
+
+                <a class="text-justify decoration-none col-md-2" href="{{post['link']}}" target="_blank"><span class="glyphicon glyphicon-comment"></span>&nbsp;{{post['comment_count']}}</a>
+            </div>
+        </div>
+    </div>
+
+</div>
