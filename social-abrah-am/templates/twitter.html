@@ -4,7 +4,7 @@
     <hr class='plus-post'>
     <div class='row'>
         <div class="col-md-12">
-            <img src="/img/twitter.png" width="16" height="16" />
+            <img src="/img/twitter.png" width="16" height="16" alt="Twitter logo" />
             <small class='text-muted'>Shared publicly - <a href="{{url}}" target='_blank' class='time'>{{post['_']['created']}}z</a></small>
         </div>
     </div>
@@ -14,7 +14,7 @@
         <div class='row'>
             <div class="media">
                 <a class="pull-left g-profile" href="https://twitter.com/{{post['retweeted_status']['user']['screen_name']}}" target='_blank'>
-                    <img class="media-object img-rounded" src="{{post['retweeted_status']['user']['profile_image_url']}}" alt="...">
+                    <img class="media-object img-rounded" src="{{post['retweeted_status']['user']['profile_image_url']}}" alt="{{post['retweeted_status']['user']['screen_name']}}'s avatar">
                 </a>
                 <div class="media-body">
                     <div class='media-header'>

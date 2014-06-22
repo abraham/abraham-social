@@ -2,7 +2,7 @@
     <hr class='plus-post'>
     <div class='row'>
         <div class="col-md-12">
-            <img src="/img/plus.png" width="16" height="16" />
+            <img src="/img/plus.png" width="16" height="16" alt="Google+ logot" />
             <small class='text-muted'>Shared publicly - <a href="{{post['url']}}" target='_blank' class='time'>{{post['_']['created']}}z</a></small>
         </div>
     </div>
@@ -27,7 +27,7 @@
         <div class='row'>
             <div class="media">
                 <a class="pull-left g-profile" href="{{post['object']['actor']['url']}}" target='_blank'>
-                    <img class="media-object img-circle" src="{{post['object']['actor']['image']['url']}}" alt="...">
+                    <img class="media-object img-circle" src="{{post['object']['actor']['image']['url']}}" alt="{{post['object']['actor']['displayName']}}'s avatar">
                 </a>
                 <div class="media-body">
                     <div class='media-header'>

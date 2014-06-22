@@ -3,7 +3,7 @@
         <hr>
         <div class="media">
             <a class="pull-left" href="{{attachment['url']}}" target='_blank'>
-                <img class="media-object" src="{{attachment['image']['url']}}" alt="...">
+                <img class="media-object" src="{{attachment['image']['url']}}" alt="{{attachment['displayName']}}">
             </a>
             <div class="media-body">
                 <a class="media-heading" href="{{attachment['url']}}" target='_blank'>
@@ -19,7 +19,7 @@
 
         {% if attachment.get('image', False) %}
             <a href="{{attachment['url']}}" target='_blank'>
-                <img src="{{attachment['image']['url']}}" class="img-responsive" width="{{attachment['image']['width']}}" height="{{attachment['image']['height']}}" />
+                <img src="{{attachment['image']['url']}}" class="img-responsive" width="{{attachment['image']['width']}}" height="{{attachment['image']['height']}}" alt="{{attachment['displayName']}}" />
             </a>
         {% end if %}
             <a class="media-heading" href="{{attachment['url']}}" target='_blank'>
