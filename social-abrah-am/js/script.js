@@ -46,8 +46,9 @@ function prettyLinks(){
         }
     }
 }
+
 prettyLinks();
-setInterval(prettyLinks, 5000);
+setInterval(prettyLinks, 60 * 1000);
 
 /*
  * JavaScript Pretty Date
