@@ -7,86 +7,86 @@
         </div>
     </div>
 
-        <div class='row'>
-            <div class="col-md-12">
-                <p>
-                    {% if post['type'] == 'WatchEvent' %}
-                        <span class="glyphicon glyphicon-eye-open"></span> Started watching <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
+    <div class='row'>
+        <div class="col-md-12">
+            <p>
+                {% if post['type'] == 'WatchEvent' %}
+                    <span class="glyphicon glyphicon-eye-open"></span> Started watching <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
 
-                    {% elif post['type'] == 'PushEvent' %}
-                        <span class="glyphicon glyphicon-floppy-saved"></span> Pushed to <a href="https://github.com/{{post['repo']['name']}}/tree/{{ post['payload']['ref'].split('/')[-1] }}" target="_blank">{{ post['payload']['ref'].split('/')[-1] }}</a> at <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
-                        <ul>
-                            {% for commit in post['payload']['commits'] %}
-                                <li><a href="https://github.com/{{ post['repo']['name'] }}/commit/{{ commit['sha'] }}" target="_blank">{{ commit['sha'][:7] }}</a> {{commit['message']}}</li>
-                            {% end %}
-                        </ul>
-
-                    {% elif post['type'] == 'PullRequestEvent' %}
-
-                        {% if post['payload']['action'] == 'closed' %}
-                            <span class="glyphicon glyphicon-ban-circle"></span> Closed pull request <a href="{{post['payload']['pull_request']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['number']}}</a>
-                            <br>
-                            <em>{{post['payload']['pull_request']['title']}}</em>
-
-                        {% elif post['payload']['action'] == 'opened' %}
-                            <span class="glyphicon glyphicon-transfer"></span> Opened pull request <a href="{{post['payload']['pull_request']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['number']}}</a>
-                            <br>
-                            <em>{{post['payload']['pull_request']['title']}}</em>
-                            <br>
-                            <small>{{post['payload']['pull_request']['commits']}} commits with {{post['payload']['pull_request']['additions']}} additions and {{post['payload']['pull_request']['deletions']}} deletions</small>
-                        {% else %}
-                            UNKNOWN PullRequestEvent {{post}}
+                {% elif post['type'] == 'PushEvent' %}
+                    <span class="glyphicon glyphicon-floppy-saved"></span> Pushed to <a href="https://github.com/{{post['repo']['name']}}/tree/{{ post['payload']['ref'].split('/')[-1] }}" target="_blank">{{ post['payload']['ref'].split('/')[-1] }}</a> at <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
+                    <ul>
+                        {% for commit in post['payload']['commits'] %}
+                            <li><a href="https://github.com/{{ post['repo']['name'] }}/commit/{{ commit['sha'] }}" target="_blank">{{ commit['sha'][:7] }}</a> {{commit['message']}}</li>
                         {% end %}
+                    </ul>
 
-                    {% elif post['type'] == 'IssueCommentEvent' %}
-                        <span class="glyphicon glyphicon-comment"></span> Commented on issue <a href="{{post['payload']['comment']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['issue']['number']}}</a>
+                {% elif post['type'] == 'PullRequestEvent' %}
+
+                    {% if post['payload']['action'] == 'closed' %}
+                        <span class="glyphicon glyphicon-ban-circle"></span> Closed pull request <a href="{{post['payload']['pull_request']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['number']}}</a>
                         <br>
-                        <em>{{post['payload']['comment']['body']}}</em>
+                        <em>{{post['payload']['pull_request']['title']}}</em>
 
-                    {% elif post['type'] == 'IssuesEvent' %}
-                        {% if post['payload']['action'] == 'closed' %}
-                            <span class="glyphicon glyphicon-ban-circle"></span> Closed issue <a href="{{post['payload']['issue']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['issue']['number']}}</a>
-                            <br>
-                            <em>{{post['payload']['issue']['title']}}</em>
-
-                        {% elif post['payload']['action'] == 'opened' %}
-                            <span class="glyphicon glyphicon-exclamation-sign"></span> Opened issue <a href="{{post['payload']['issue']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['issue']['number']}}</a>
-                            <br>
-                            <em>{{post['payload']['issue']['title']}}</em>
-
-                        {% else %}
-                            UNKNOWN IssueEvent {{post}}
-                        {% end %}
-
-                    {% elif post['type'] == 'GollumEvent' %}
-                        <span class="glyphicon glyphicon-edit"></span> Edited <a href="{{ post['payload']['pages'][0]['html_url'] }}" target="_blank">{{ post['payload']['pages'][0]['title']}}</a> at <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
-
-                    {% elif post['type'] == 'ForkEvent' %}
-                        <span class="glyphicon glyphicon-edit"></span> Forked <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a> to <a href="{{post['payload']['forkee']['html_url']}}" target="_blank">{{post['payload']['forkee']['full_name']}}</a>
-
-                    {% elif post['type'] == 'FollowEvent' %}
-                        <span class="glyphicon glyphicon-plus"></span> Followed <a href="{{post['payload']['target']['html_url']}}" target="_blank">{{post['payload']['target']['login']}}</a>
-
-                    {% elif post['type'] == 'DeleteEvent' %}
-                        <span class="glyphicon glyphicon-trash"></span> Deleted {{post['payload']['ref_type']}} {{post['payload']['ref']}} from <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
-
-                    {% elif post['type'] == 'CreateEvent' %}
-                        {% if post['payload']['ref_type'] == 'branch' %}
-                            <span class="glyphicon glyphicon-plus"></span> Created {{post['payload']['ref_type']}} <a href="https://github.com/{{post['repo']['name']}}/tree/{{post['payload']['ref']}}" target="_blank">{{post['payload']['ref']}}</a> from <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
-                            <br>
-                            <em>{{post['payload']['description']}}</em>
-                        {% elif post['payload']['ref_type'] == 'repository' %}
-                            <span class="glyphicon glyphicon-plus"></span> Created {{post['payload']['ref_type']}} <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
-                            <br>
-                            <em>{{post['payload']['description']}}</em>
-                        {% end %}
-
+                    {% elif post['payload']['action'] == 'opened' %}
+                        <span class="glyphicon glyphicon-transfer"></span> Opened pull request <a href="{{post['payload']['pull_request']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['number']}}</a>
+                        <br>
+                        <em>{{post['payload']['pull_request']['title']}}</em>
+                        <br>
+                        <small>{{post['payload']['pull_request']['commits']}} commits with {{post['payload']['pull_request']['additions']}} additions and {{post['payload']['pull_request']['deletions']}} deletions</small>
                     {% else %}
-                        UNKNOWN GITHUB EVENT {{post}}
+                        UNKNOWN PullRequestEvent {{post}}
                     {% end %}
 
-                </p>
-            </div>
+                {% elif post['type'] == 'IssueCommentEvent' %}
+                    <span class="glyphicon glyphicon-comment"></span> Commented on issue <a href="{{post['payload']['comment']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['issue']['number']}}</a>
+                    <br>
+                    <em>{{post['payload']['comment']['body']}}</em>
+
+                {% elif post['type'] == 'IssuesEvent' %}
+                    {% if post['payload']['action'] == 'closed' %}
+                        <span class="glyphicon glyphicon-ban-circle"></span> Closed issue <a href="{{post['payload']['issue']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['issue']['number']}}</a>
+                        <br>
+                        <em>{{post['payload']['issue']['title']}}</em>
+
+                    {% elif post['payload']['action'] == 'opened' %}
+                        <span class="glyphicon glyphicon-exclamation-sign"></span> Opened issue <a href="{{post['payload']['issue']['html_url']}}" target="_blank">{{post['repo']['name']}}#{{post['payload']['issue']['number']}}</a>
+                        <br>
+                        <em>{{post['payload']['issue']['title']}}</em>
+
+                    {% else %}
+                        UNKNOWN IssueEvent {{post}}
+                    {% end %}
+
+                {% elif post['type'] == 'GollumEvent' %}
+                    <span class="glyphicon glyphicon-edit"></span> Edited <a href="{{ post['payload']['pages'][0]['html_url'] }}" target="_blank">{{ post['payload']['pages'][0]['title']}}</a> at <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
+
+                {% elif post['type'] == 'ForkEvent' %}
+                    <span class="glyphicon glyphicon-edit"></span> Forked <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a> to <a href="{{post['payload']['forkee']['html_url']}}" target="_blank">{{post['payload']['forkee']['full_name']}}</a>
+
+                {% elif post['type'] == 'FollowEvent' %}
+                    <span class="glyphicon glyphicon-plus"></span> Followed <a href="{{post['payload']['target']['html_url']}}" target="_blank">{{post['payload']['target']['login']}}</a>
+
+                {% elif post['type'] == 'DeleteEvent' %}
+                    <span class="glyphicon glyphicon-trash"></span> Deleted {{post['payload']['ref_type']}} {{post['payload']['ref']}} from <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
+
+                {% elif post['type'] == 'CreateEvent' %}
+                    {% if post['payload']['ref_type'] == 'branch' %}
+                        <span class="glyphicon glyphicon-plus"></span> Created {{post['payload']['ref_type']}} <a href="https://github.com/{{post['repo']['name']}}/tree/{{post['payload']['ref']}}" target="_blank">{{post['payload']['ref']}}</a> from <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
+                        <br>
+                        <em>{{post['payload']['description']}}</em>
+                    {% elif post['payload']['ref_type'] == 'repository' %}
+                        <span class="glyphicon glyphicon-plus"></span> Created {{post['payload']['ref_type']}} <a href="https://github.com/{{post['repo']['name']}}" target="_blank">{{post['repo']['name']}}</a>
+                        <br>
+                        <em>{{post['payload']['description']}}</em>
+                    {% end %}
+
+                {% else %}
+                    UNKNOWN GITHUB EVENT {{post}}
+                {% end %}
+
+            </p>
         </div>
+    </div>
 
 </div>
