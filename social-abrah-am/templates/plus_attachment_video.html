@@ -1,6 +1,11 @@
 <div class="col-md-12">
-    <iframe src="{{attachment['embed']['url']}}" frameborder="0"></iframe>
-    <!-- <a href="{{attachment['url']}}" target='_blank'>
-        <img src="{{attachment['image']['url']}}" class="img-responsive" alt="{{attachment['content']}}" title="{{attachment['content']}}" />
-    </a> -->
+    <a href="{{attachment['url']}}" target='_blank'>
+        <img src="{{attachment['image']['url']}}" class="img-responsive" alt="{{attachment['displayName']}}" title="{{attachment['displayName']}}" width="{{attachment['image']['width']}}" height="{{attachment['image']['height']}}" />
+    </a>
+    <a class="media-heading" href="{{attachment['url']}}" target="_blank">
+        <span>{{attachment['displayName']}}</span>
+    </a>
+    <p>
+        <small class="text-muted">{{attachment['content']}}</small>
+    </p>
 </div>
