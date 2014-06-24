@@ -69,6 +69,9 @@
                                 <a class="" href="https://github.com/abraham" title="GitHub"><i class="fa fa-github"></i></a>
                             </li>
                             <li class="menu-item">
+                                <a class="" href="http://instagram.com/abrahamwilliams" title="Instagram"><i class="fa fa-instagram"></i></a>
+                            </li>
+                            <li class="menu-item">
                                 <a class="" href="https://stackoverflow.com/users/26406/abraham" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
                             </li>
 						</ul><!--/ uL#nav -->
@@ -97,7 +100,7 @@
     <section id="activity" name="activity"></section>
     <div class="container desc"><!-- ('plus', 'twitter', 'github', 'stackexchange:answers') -->
         {% for post in posts %}
-            {% if post['_']['ns'] in ('twitter', 'github', 'stackexchange:answers', 'plus') %}
+            {% if post['_']['ns'] in ('twitter', 'github', 'stackexchange:answers', 'plus', 'instagram:liked') %}
                 {% set path = '/'.join(post['_']['ns'].split(':')) + '.html' %}
                 {% module Template(path, post=post) %}
             {% end %}

@@ -1,0 +1,40 @@
+{% extends "../item.html" %}
+
+{% block left %}
+    <h5>
+        <i class="fa fa-instagram"></i>
+        <sm>
+            Liked
+            <a href="{{ post['link'] }}" target='_blank' class='time'>{{ post['_']['created'] }}z</a>
+        </sm>
+    </h5>
+{% end bock %}
+
+
+{% block center %}
+    {% set url = post['images']['standard_resolution']['url'].replace('http://', 'https://') %}
+    {% set avatar = post['user']['profile_picture'].replace('http://', 'https://a248.e.akamai.net/f/1404/2456/3m/') %}
+    <p>
+        <img class="img-rounded img-responsive" src="{{ url }}" alt="">
+    </p>
+
+    <div class="media">
+        <a class="pull-left g-profile" href="http://instagram.com/{{ post['user']['username'] }}" target='_blank'>
+            <img class="media-object img-rounded" src="{{ avatar }}" alt="{{ post['user']['full_name'] }}'s avatar" width="50" height="50">
+        </a>
+        <div class="media-body">
+            <div class='media-header'>
+                <a href="http://instagram.com/{{ post['user']['username'] }}" target='_blank'>{{ post['user']['full_name'] }}</a>
+            </div>
+            <p>{{ post['caption']['text'] }}</p>
+        </div>
+    </div>
+{% end bock %}
+
+
+{% block right %}
+
+{% end bock %}
+
+
+{{post}}
