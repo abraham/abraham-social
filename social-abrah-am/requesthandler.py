@@ -17,12 +17,12 @@ class RequestHandler(web.RequestHandler):
         directives = [
             "default-src 'self'",
             "connect-src 'self'",
-            "font-src 'self'",
+            "font-src 'self' https://themes.googleusercontent.com",
             "frame-src 'self' https://apis.google.com https://www.youtube.com",
             "img-src 'self' https:",
             "media-src 'none'",
             "script-src 'self' https://www.google.com https://ajax.googleapis.com https://www.google-analytics.com https://s.ytimg.com https://apis.google.com https://ssl.google-analytics.com 'unsafe-eval'",
-            "style-src 'self' https://ajax.googleapis.com https://www.google.com https://s.ytimg.com",
+            "style-src 'self' https://*.googleapis.com https://www.google.com https://s.ytimg.com 'unsafe-inline'",
         ]
         self.set_header('Content-Security-Policy', '; '.join(directives))
         self.set_header('X-XSS-Protection', '1; mode=block')

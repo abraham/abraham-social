@@ -3,7 +3,7 @@ from tornado import gen
 import datetime
 import time
 from email import utils
-
+from views import link_text
 
 from requesthandler import RequestHandler
 
@@ -17,14 +17,17 @@ class IndexHandler(RequestHandler):
 
         posts = []
         db = self.settings['db']
-        cursor = db.posts.find().sort('_.created', -1).limit(50)
+        query = {'_.ns': {'$in': ['twitter', 'github', 'stackexchange:answers', 'plus']}}
+        cursor = db.posts.find().sort('_.created', -1).limit(100)
 
         while (yield cursor.fetch_next):
-            post = cursor.next_object()
-            posts.append(post)
+            doc = cursor.next_object()
+            posts.append(doc)
 
         context = {
             'posts': posts,
+            'cover': 'https://lh3.googleusercontent.com/-V7-W-a_teII/U6Rr7LNirfI/AAAAAAADBJQ/EqZjztIDjJI/s2520-fcrop64=1,00002776ffffffa8/Sunny_Mountains.jpg',
+            'avatar': 'https://lh4.googleusercontent.com/-6LBE-Jve_ls/AAAAAAAAAAI/AAAAAAAC8qM/9bpLLGd_FlY/photo.jpg?sz=240'
         }
 
         self.render('index.html', **context)

@@ -1,49 +1,44 @@
-{% set url = 'https://twitter.com/' + post['user']['screen_name'] + '/status/' + post['id_str'] %}
+{% extends "item.html" %}
 
-<div class="col-md-4 col-md-offset-1 plus-post">
-    <hr class='plus-post'>
-    <div class='row'>
-        <div class="col-md-12">
-            <img src="/img/twitter.png" width="16" height="16" alt="Twitter logo" />
-            <small class='text-muted'>Shared publicly - <a href="{{url}}" target='_blank' class='time'>{{post['_']['created']}}z</a></small>
-        </div>
-    </div>
+{% block left %}
+    {% set url = 'https://twitter.com/' + post['user']['screen_name'] + '/status/' + post['id_str'] %}
 
-    {% if post.get('retweeted_status', None) is not None %}
-        <hr>
-        <div class='row'>
-            <div class="media">
-                <a class="pull-left g-profile" href="https://twitter.com/{{post['retweeted_status']['user']['screen_name']}}" target='_blank'>
-                    <img class="media-object img-rounded" src="{{post['retweeted_status']['user']['profile_image_url']}}" alt="{{post['retweeted_status']['user']['screen_name']}}'s avatar">
-                </a>
-                <div class="media-body">
-                    <div class='media-header'>
-                        <a class="g-profile" href="https://twitter.com/{{post['retweeted_status']['user']['screen_name']}}" target='_blank'>{{post['retweeted_status']['user']['name']}}</a>
-                        <a href="{{url}}" target='_blank'>originally shared</a>:
-                    </div>
-                    <p>{% raw link_text(post['retweeted_status']['text']) %}</p>
-                </div>
-            </div>
-        </div>
+    <h5>
+        <i class="fa fa-twitter"></i>
+        <sm>
+            Tweeted
+            <a href="{{ url }}" target='_blank' class='time'>{{ post['_']['created'] }}z</a>
+        </sm>
+    </h5>
+{% end bock %}
 
-    {% else %}
-        <div class='row'>
-            <div class="col-md-12">
-                <p>{% raw link_text(post['text']) %}</p>
-            </div>
-        </div>
+
+{% block center %}
+    {% set text = post['text'] %}
+
+    {% if post.get('retweeted_status', False) %}
+        {% set text = post['retweeted_status']['text'] %}
+
+        <p>
+            <span class='text-muted'>
+                Retweeted <a href="https://twitter.com/{{ post['retweeted_status']['user']['screen_name'] }}" target="_blank">{{ post['retweeted_status']['user']['name'] }}</a>
+            </span>
+        </p>
+
+    {% elif post.get('in_reply_to_status_id', False) %}
+        <p>
+            <span class='text-muted'>
+                Replied to <a href="https://twitter.com/{{ post['in_reply_to_screen_name'] }}" target="_blank">{{ post['in_reply_to_screen_name'] }}</a>
+            </span>
+        </p>
     {% end if %}
 
-    <br>
+    <p>
+        {% raw link_text(text) %}
+    </p>
+{% end bock %}
 
-    <div class='row'>
-        <div class="col-md-12">
-            <div class="text-justify">
-                <a class="text-justify decoration-none col-md-3 col-md-offset-2" href="{{url}}" target="_blank"><span class="glyphicon glyphicon-share-alt"></span>&nbsp;0</a>
-                <a class="text-justify decoration-none col-md-3" href="{{url}}" target="_blank"><span class="glyphicon glyphicon-retweet"></span>&nbsp;{{post.get('retweet_count', 0)}}</a>
-                <a class="text-justify decoration-none col-md-3" href="{{url}}" target="_blank"><span class="glyphicon glyphicon-star"></span>&nbsp;{{post.get('favorite_count', 0)}}</a>
-            </div>
-        </div>
-    </div>
 
-</div>
+{% block right %}
+
+{% end bock %}

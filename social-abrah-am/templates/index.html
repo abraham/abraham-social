@@ -1,28 +1,117 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
 
-{% block container %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Abraham's recent social activity">
+    <meta name="author" content="Abraham Williams">
 
-<header class="container">
-    <h1 class='col-md-offset-1'>
-        <a href="https://plus.google.com/114233674199568482864" class='g-profile' target="_blank"><img src='https://abrah.am/img/logo-300.jpg' class='img-circle' width='80' height='80' alt="Abraham's avatar" /></a>
-        Abraham's recent social activity
-        <small>
-            <a href="https://plus.google.com/114233674199568482864" class='g-profile img-rounded' target="_blank"><img src="/img/plus.png" class="img" width="24" height="24" alt="Google+ logo" ></a>
-            <a href="https://twitter.com/abraham" target="_blank"><img src="/img/twitter.png" class="img" width="24" height="24" alt="Twitter logo" ></a>
-            <a href="https://github.com/abraham" target="_blank"><img src="/img/github.png" class="img" width="24" height="24" alt="GitHub logo" ></a>
-            <a href="https://stackoverflow.com/users/26406/abraham" target="_blank"><img src="/img/stackoverflow.png" class="img" width="24" height="24" alt="Stack Overflow logo" ></a>
-        </small>
-    </h1>
-</header>
+    <link rel="shortcut icon" href="https://abrah.am/favicon.ico">
+    <link rel='me' href='https://plus.google.com/+abrahamwilliams' />
+    <link rel='author' href='https://plus.google.com/+abrahamwilliams' />
 
-<div class="container">
-    <div class="row">
+    <meta property="og:title" content="{% block title %}Abraham's social posts{% end %}" />
+    <meta property="og:image" content="https://abrah.am/img/logo-300.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Abraham's recent social activity">
+
+    <title>Abraham's social activity</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+
+    <style>
+    #headerwrap {
+        background: url({{cover}}) no-repeat center top;
+        margin-top: 60px;
+        padding-top:140px;
+        text-align:center;
+        background-attachment: relative;
+        background-position: center center;
+        min-height: 500px;
+        width: 100%;
+
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
+
+  </head>
+
+  <body data-spy="scroll" data-offset="0" data-target="#nav">
+
+	<div id="section-topbar">
+		<div id="topbar-inner">
+			<div class="container">
+				<div class="row">
+					<div class="dropdown">
+						<ul id="nav" class="nav">
+							<li class="menu-item">
+                                <a class="" href="https://abrah.am" title="Home"><i class="fa fa-home"></i></a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="g-profile" href="https://plus.google.com/114233674199568482864" title="Google+"><i class="fa fa-google-plus"></i></a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="" href="https://twitter.com/abraham" title="Twitter"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="" href="https://github.com/abraham" title="GitHub"><i class="fa fa-github"></i></a>
+                            </li>
+                            <li class="menu-item">
+                                <a class="" href="https://stackoverflow.com/users/26406/abraham" title="Stack Overflow"><i class="fa fa-stack-overflow"></i></a>
+                            </li>
+						</ul><!--/ uL#nav -->
+					</div><!-- /.dropdown -->
+
+					<div class="clear"></div>
+				</div><!--/.row -->
+			</div><!--/.container -->
+
+			<div class="clear"></div>
+		</div><!--/ #topbar-inner -->
+	</div><!--/ #section-topbar -->
+	
+	<div id="headerwrap">
+		<div class="container">
+			<div class="row centered">
+				<div class="col-lg-12">
+					<h1><a href="https://plus.google.com/114233674199568482864" class='g-profile' target="_blank"><img src='{{avatar}}' class='img-circle' width='120' height='120' alt="Abraham's avatar" /></a> Abraham Williams</h1>
+					<h2>Recent social activity</h2>
+				</div><!--/.col-lg-12 -->
+			</div><!--/.row -->
+		</div><!--/.container -->
+	</div><!--/.#headerwrap -->
+
+
+    <section id="activity" name="activity"></section>
+    <div class="container desc"><!-- ('plus', 'twitter', 'github', 'stackexchange:answers') -->
         {% for post in posts %}
-            {% if post['_']['ns'] in ('plus', 'twitter', 'github', 'stackexchange:answers') %}
-            {% set path = '/'.join(post['_']['ns'].split(':')) + '.html' %}
+            {% if post['_']['ns'] in ('twitter', 'github', 'stackexchange:answers', 'plus') %}
+                {% set path = '/'.join(post['_']['ns'].split(':')) + '.html' %}
                 {% module Template(path, post=post) %}
             {% end %}
         {% end for %}
-    </div>
-</div><!-- /.container -->
-{% end bock %}
+    </div><!--/.container -->
+
+
+	<div id="c">
+		<div class="container ">
+			<p>Built by <a href="https://abrah.am">Abraham Williams</a> ● <a href="https://github.com/abraham/social-backup">Crawler source</a></p>
+		</div>
+	</div>
+
+    <script src='/js/script.js'></script>
+
+  </body>
+</html>
