@@ -26,7 +26,9 @@
             <div class='media-header'>
                 <a href="http://instagram.com/{{ post['user']['username'] }}" target='_blank'>{{ post['user']['full_name'] }}</a>
             </div>
-            <p>{{ post['caption']['text'] }}</p>
+            {% if post['caption'] is not None %}
+                <p>{{ post['caption']['text'] }}</p>
+            {% end %}
         </div>
     </div>
 {% end bock %}
