@@ -17,7 +17,7 @@ class RequestHandler(web.RequestHandler):
         directives = [
             "default-src 'self'",
             "connect-src 'self'",
-            "font-src 'self' https://themes.googleusercontent.com",
+            "font-src 'self' https:",
             "frame-src 'self' https://apis.google.com https://www.youtube.com",
             "img-src 'self' https:",
             "media-src 'none'",
