@@ -3,7 +3,7 @@
 
 import os
 from tornado import ioloop, web
-from motor import MotorReplicaSetClient
+from motor import MotorClient
 
 
 from indexhandler import IndexHandler
@@ -13,8 +13,7 @@ from uptimehandler import UptimeHandler
 import views
 
 dbConnection = os.environ.get('MONGODB_CONNECTION')
-dbReplicaSet = os.environ.get('MONGODB_SET')
-db = MotorReplicaSetClient(dbConnection, replicaSet=dbReplicaSet).posts
+db = MotorClient(dbConnection).plus
 
 
 settings = {
